@@ -14,6 +14,13 @@ class IndexView(generic.CreateView):
     form_class = SongModelForm
     success_url = reverse_lazy('music:index')
 
-    def form_valid(self, form):
-        chain_tasks(form.cleaned_data['link'], form.cleaned_data['email']).apply_async()
-        return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            chain_tasks(form.cleaned_data['link'], form.cleaned_data['email']).apply_async()
+            form.save()
+            posted = True
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form': form, 'posted': posted})
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})

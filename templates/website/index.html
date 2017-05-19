@@ -21,6 +21,11 @@
       margin-top: -150px;
       margin-left: -100px;
     }
+
+    .panel {
+        width: 200px;
+        height: 100px;
+    }
 </style>
 
 
@@ -36,8 +41,14 @@
                 </div>
                 <button class="btn btn-primary" type="submit" value="Download!">Download!</button>
             </form>
+            {% if posted %}
+            <div class='panel panel-info'>
+                <div class='panel-body'>
+                    <p>Your song is on its way!</p>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </body>
 </html>
-
