@@ -13,13 +13,17 @@ from subprocess import call
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
+from faker import Factory
+
 import os
+
+faker = Factory.create()
 
 
 @shared_task
 def download_url(url):
     yt = YouTube(url)
-    yt.set_filename(yt.filename.split()[0])
+    yt.set_filename(yt.filename.split()[0] + faker.word())
     video = yt.get('mp4', '360p')
     video.download(settings.MEDIA_ROOT)
     return 'media/{}'.format(yt.filename)
