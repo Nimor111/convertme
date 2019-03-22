@@ -16,7 +16,7 @@ pickleshare==0.7.4
 prompt-toolkit==1.0.14
 psycopg2==2.7.1
 ptyprocess==0.5.1
-Pygments==2.2.0
+Pygments==2.3.1
 pyparsing==2.2.0
 python-http-client==2.2.1
 pytube==6.2.2
